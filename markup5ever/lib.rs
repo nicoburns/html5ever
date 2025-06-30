@@ -38,8 +38,8 @@ macro_rules! small_char_set ( ($($e:expr)+) => (
 ));
 
 pub use web_atoms::{
-    local_name, namespace_prefix, namespace_url, ns, LocalName, LocalNameStaticSet, Namespace,
-    NamespaceStaticSet, Prefix, PrefixStaticSet,
+    expanded_name, local_name, namespace_prefix, namespace_url, ns, LocalName, LocalNameStaticSet,
+    Namespace, NamespaceStaticSet, Prefix, PrefixStaticSet,
 };
 
 pub mod data {

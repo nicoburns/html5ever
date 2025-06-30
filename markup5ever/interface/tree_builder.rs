@@ -11,11 +11,11 @@
 //!
 //! It can be used by a parser to create the DOM graph structure in memory.
 
-use crate::interface::{Attribute, ExpandedName, QualName};
+use crate::interface::{Attribute, QualName};
 use std::borrow::Cow;
 use std::fmt::Debug;
 use tendril::StrTendril;
-use web_atoms::{LocalName, Namespace};
+pub use web_atoms::ElemName;
 
 pub use self::NodeOrText::{AppendNode, AppendText};
 pub use self::QuirksMode::{LimitedQuirks, NoQuirks, Quirks};
@@ -86,20 +86,6 @@ where
         _ => {},
     }
     sink.create_element(name, attrs, flags)
-}
-
-/// An abstraction over any type that can represent an element's local name and namespace.
-pub trait ElemName: Debug {
-    fn ns(&self) -> &Namespace;
-    fn local_name(&self) -> &LocalName;
-
-    #[inline(always)]
-    fn expanded(&self) -> ExpandedName<'_> {
-        ExpandedName {
-            ns: self.ns(),
-            local: self.local_name(),
-        }
-    }
 }
 
 /// Methods a parser can use to create the DOM. The DOM provider implements this trait.
